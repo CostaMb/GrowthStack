@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorOS — The Ultimate Creator Platform</title>
+    <!-- Fonturi moderne 2026 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset și variabile */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --grad-1: linear-gradient(135deg, #8B5CF6, #EC4899);
+            --grad-2: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            --grad-3: linear-gradient(135deg, #FBBF24, #EC4899);
+            --bg-dark: #0A0A0F;
+            --bg-card: rgba(20, 20, 30, 0.7);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border-glow: rgba(139, 92, 246, 0.3);
+            --glass-effect: backdrop-filter: blur(12px);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background animat */
+        #gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: gradientMove 20s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--grad-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-button {
+            background: var(--grad-1);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-text {
+            background: var(--grad-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-primary {
+            background: var(--grad-1);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .social-proof {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .avatar-group {
+            display: flex;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+            margin-left: -10px;
+            background: var(--grad-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--grad-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+        }
+
+        .floating-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .mini-dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .mini-chart {
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-chart::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: var(--grad-1);
+            border-radius: 12px;
+            animation: chartGrow 2s ease-out;
+        }
+
+        @keyframes chartGrow {
+            from { height: 0; }
+            to { height: 40px; }
+        }
+
+        /* Features Section */
+        .features {
+            margin: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #8B5CF6;
+            font-weight: 500;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            margin: 6rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: #8B5CF6;
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--grad-1);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--grad-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: #8B5CF6;
+            font-weight: 600;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .pricing-card.popular .pricing-button {
+            background: var(--grad-1);
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin: 6rem 0;
+            text-align: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .email-form input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: #8B5CF6;
+        }
+
+        .email-form button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--grad-1);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .email-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0.75rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--grad-1);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .social-proof {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 568px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div id="gradient-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar container">
+        <div class="logo-container">
+            <!-- Logo SVG -->
+            <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="95" fill="url(#gradMain)" stroke="white" stroke-width="2"/>
+                <path d="M80 65 L145 100 L80 135 L80 65" fill="white" filter="url(#glow)"/>
+                <circle cx="100" cy="100" r="25" fill="none" stroke="white" stroke-width="3" stroke-dasharray="6 6"/>
+                <defs>
+                    <linearGradient id="gradMain" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#8B5CF6"/>
+                        <stop offset="1" stop-color="#EC4899"/>
+                    </linearGradient>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+            </svg>
+            <span class="logo-text">CreatorOS</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#academy">Academy</a>
+            <a href="#community">Community</a>
+            <button class="nav-button">Login</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content fade-in">
+                <h1>
+                    The <span class="gradient-text">Ultimate OS</span><br>
+                    for Content Creators
+                </h1>
+                <p class="hero-description">
+                    AI-powered tools that help you grow 3x faster, save 70% of your time, 
+                    and connect with your audience like never before.
+                </p>
+                <div class="hero-cta">
+                    <button class="cta-primary">Start Creating →</button>
+                    <button class="cta-secondary">Watch Demo</button>
+                </div>
+                <div class="social-proof">
+                    <div class="avatar-group">
+                        <div class="avatar">👤</div>
+                        <div class="avatar">👤</div>
+                        <div class="avatar">👤</div>
+                        <div class="avatar">+2K</div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Creators</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3.2x</div>
+                            <div class="stat-label">Growth</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual fade-in delay-1">
+                <div class="floating-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: var(--text-secondary);">Analytics Overview</span>
+                        <span class="gradient-text">+47%</span>
+                    </div>
+                    <div class="mini-dashboard">
+                        <div class="mini-chart"></div>
+                        <div class="mini-chart"></div>
+                        <div class="mini-chart"></div>
+                        <div class="mini-chart"></div>
+                    </div>
+                    <div style="margin-top: 1.5rem; display: flex; justify-content: space-between;">
+                        <span>Views</span>
+                        <span class="gradient-text">2.4M</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="section-header fade-in">
+                <h2>Everything you need to <span class="gradient-text">succeed</span></h2>
+                <p>AI-powered tools designed to make content creation effortless and growth inevitable</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Analytics Hub -->
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="10" width="60" height="60" rx="16" fill="black"/>
+                            <path d="M10 30 H70 M10 45 H70 M30 10 V70 M50 10 V70" stroke="#222" stroke-width="1.2"/>
+                            <circle cx="25" cy="45" r="4" fill="#8B5CF6" filter="url(#glowData)"/>
+                            <circle cx="45" cy="30" r="4" fill="#EC4899" filter="url(#glowData)"/>
+                            <circle cx="60" cy="55" r="4" fill="#3B82F6" filter="url(#glowData)"/>
+                            <path d="M20 50 L35 35 L50 48 L65 30" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            <defs>
+                                <filter id="glowData" x="-200%" y="-200%" width="400%" height="400%">
+                                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Analytics Hub</h3>
+                    <p>Cross-platform analytics with predictive growth insights. Know what works before you post.</p>
+                    <span class="feature-tag">AI-Powered</span>
+                </div>
+
+                <!-- Content Studio -->
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="28" y="25" width="6" height="40" rx="3" transform="rotate(15 28 25)" fill="url(#gradPencil)"/>
+                            <rect x="40" y="18" width="6" height="30" rx="3" transform="rotate(45 40 18)" fill="url(#gradPencil)"/>
+                            <polygon points="55,20 65,30 60,35 50,25" fill="#EC4899" filter="url(#glowData)"/>
+                            <path d="M22 22 L26 22 L28 18 L30 22 L34 22 L30 25 L32 30 L28 27 L24 30 L26 25 Z" fill="#FBBF24" filter="url(#glowData)"/>
+                            <defs>
+                                <linearGradient id="gradPencil" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#8B5CF6"/>
+                                    <stop offset="1" stop-color="#3B82F6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Content Studio</h3>
+                    <p>AI ideation engine + automatic repurposing. Turn one video into 10 posts instantly.</p>
+                    <span class="feature-tag">Save 70% Time</span>
+                </div>
+
+                <!-- Monetization -->
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 55 L45 30 L60 45 L70 25" stroke="url(#gradCoin)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                            <circle cx="55" cy="45" r="12" stroke="url(#gradCoin)" stroke-width="2.5" fill="none"/>
+                            <text x="51" y="50" font-family="Arial" font-size="14" fill="white" font-weight="bold">$</text>
+                            <circle cx="70" cy="25" r="5" fill="#EC4899" filter="url(#glowData)"/>
+                            <defs>
+                                <linearGradient id="gradCoin" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#FBBF24"/>
+                                    <stop offset="1" stop-color="#EC4899"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Monetization Tools</h3>
+                    <p>Track revenue, find sponsors, and maximize your earnings across all platforms.</p>
+                    <span class="feature-tag">Maximize Revenue</span>
+                </div>
+
+                <!-- Collaboration -->
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="30" cy="40" r="18" stroke="url(#gradCollab1)" stroke-width="3" fill="none" filter="url(#glowData)"/>
+                            <circle cx="50" cy="40" r="18" stroke="url(#gradCollab2)" stroke-width="3" fill="none" filter="url(#glowData)"/>
+                            <circle cx="30" cy="40" r="5" fill="#8B5CF6"/>
+                            <circle cx="50" cy="40" r="5" fill="#EC4899"/>
+                            <defs>
+                                <linearGradient id="gradCollab1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#8B5CF6"/>
+                                    <stop offset="1" stop-color="#3B82F6"/>
+                                </linearGradient>
+                                <linearGradient id="gradCollab2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#EC4899"/>
+                                    <stop offset="1" stop-color="#F59E0B"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Collaboration Hub</h3>
+                    <p>Find perfect brand matches and connect with creators in your niche.</p>
+                    <span class="feature-tag">Network</span>
+                </div>
+
+                <!-- Growth Tools -->
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M45 30 L55 20 L60 25 L50 35 L45 30" fill="url(#gradRocket)"/>
+                            <rect x="42" y="32" width="12" height="25" rx="6" fill="url(#gradRocket)"/>
+                            <circle cx="48" cy="42" r="3" fill="white"/>
+                            <polygon points="42,57 38,65 46,62 42,57" fill="#EC4899"/>
+                            <polygon points="54,57 58,65 50,62 54,57" fill="#8B5CF6"/>
+                            <circle cx="48" cy="70" r="3" fill="#FBBF24" filter="url(#glowData)"/>
+                            <circle cx="48" cy="76" r="5" fill="#EC4899" filter="url(#glowData)"/>
+                            <defs>
+                                <linearGradient id="gradRocket" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#3B82F6"/>
+                                    <stop offset="1" stop-color="#8B5CF6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Growth Tools</h3>
+                    <p>Viral hooks library, hashtag optimizer, and cross-promotion network.</p>
+                    <span class="feature-tag">Go Viral</span>
+                </div>
+
+                <!-- Academy -->
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="40,15 60,25 60,45 40,55 20,45 20,25" stroke="url(#gradAcademy)" stroke-width="2.5" fill="none"/>
+                            <path d="M35 32 L48 40 L35 48 Z" fill="url(#gradAcademy)" filter="url(#glowData)"/>
+                            <circle cx="40" cy="25" r="2" fill="#FBBF24"/>
+                            <circle cx="52" cy="32" r="2" fill="#EC4899"/>
+                            <defs>
+                                <linearGradient id="gradAcademy" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop stop-color="#F59E0B"/>
+                                    <stop offset="1" stop-color="#EC4899"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Creator Academy</h3>
+                    <p>Mini-courses, 1:1 coaching, and mastermind groups with top creators.</p>
+                    <span class="feature-tag">Learn</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="section-header fade-in">
+                <h2>Simple, <span class="gradient-text">transparent</span> pricing</h2>
+                <p>Choose the plan that fits your creator journey</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card fade-in delay-1">
+                    <div class="pricing-header">
+                        <h3>Free</h3>
+                        <div class="price">$0<span class="price-period">/mo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Basic analytics</li>
+                        <li>5 idea generations/month</li>
+                        <li>Community access</li>
+                        <li>Basic hashtag tools</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="pricing-card popular fade-in delay-2">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <div class="price">$29<span class="price-period">/mo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Advanced analytics</li>
+                        <li>Unlimited idea generation</li>
+                        <li>Content repurposing</li>
+                        <li>Hashtag optimizer</li>
+                        <li>Brand matchmaking</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="pricing-button">Start Pro →</button>
+                </div>
+
+                <!-- Studio Tier -->
+                <div class="pricing-card fade-in delay-3">
+                    <div class="pricing-header">
+                        <h3>Studio</h3>
+                        <div class="price">$79<span class="price-period">/mo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Everything in Pro</li>
+                        <li>Multi-team access</li>
+                        <li>API access</li>
+                        <li>Custom features</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                    <button class="pricing-button">Contact Sales</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section fade-in">
+            <h2>Ready to <span class="gradient-text">transform</span> your content creation?</h2>
+            <p>Join 10,000+ creators who are already growing with CreatorOS</p>
+            <div class="email-form">
+                <input type="email" placeholder="Enter your email" id="emailInput">
+                <button onclick="handleSignup()">Get Early Access →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>CreatorOS</h4>
+                <a href="#about">About Us</a>
+                <a href="#careers">Careers</a>
+                <a href="#blog">Blog</a>
+                <a href="#press">Press</a>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#integrations">Integrations</a>
+                <a href="#changelog">Changelog</a>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <a href="#academy">Academy</a>
+                <a href="#community">Community</a>
+                <a href="#help">Help Center</a>
+                <a href="#status">Status</a>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
+                <a href="#security">Security</a>
+                <a href="#cookies">Cookies</a>
+            </div>
+        </div>
+        <div class="social-links" style="justify-content: center; margin-top: 2rem;">
+            <a href="#" class="social-link">𝕏</a>
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">💼</a>
+            <a href="#" class="social-link">📹</a>
+        </div>
+        <div class="copyright">
+            © 2026 CreatorOS. All rights reserved. Built for the next generation of creators.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Email signup handler
+        function handleSignup() {
+            const email = document.getElementById('emailInput').value;
+            if (email && email.includes('@')) {
+                alert(`Thanks for signing up, ${email}! We'll notify you when we launch.`);
+                document.getElementById('emailInput').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .pricing-card, .section-header').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for background
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.getElementById('gradient-bg');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            bg.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+        });
+
+        // Counter animation for stats
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.round(current).toLocaleString() + '+';
+            }, 16);
+        }
+
+        // Trigger counter animation when stats are visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const value = parseInt(stat.textContent);
+                        animateValue(stat, 0, value, 2000);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelector('.stats') && statsObserver.observe(document.querySelector('.stats'));
+
+        // Add loading animation for cards
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Mobile menu toggle (simplified)
+        const mobileMenuBtn = document.createElement('button');
+        mobileMenuBtn.className = 'mobile-menu-btn';
+        mobileMenuBtn.innerHTML = '☰';
+        mobileMenuBtn.style.cssText = `
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        `;
+
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (window.innerWidth <= 968) {
+            mobileMenuBtn.style.display = 'block';
+            navbar.insertBefore(mobileMenuBtn, navLinks);
+            navLinks.style.display = 'none';
+        }
+
+        mobileMenuBtn.addEventListener('click', () => {
+            if (navLinks.style.display === 'none') {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.right = '2rem';
+                navLinks.style.background = 'var(--bg-card)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.borderRadius = '16px';
+                navLinks.style.backdropFilter = 'blur(12px)';
+                navLinks.style.border = '1px solid rgba(255,255,255,0.1)';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 968) {
+                mobileMenuBtn.style.display = 'block';
+                if (!navLinks.style.display || navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                }
+            } else {
+                mobileMenuBtn.style.display = 'none';
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'static';
+                navLinks.style.background = 'none';
+                navLinks.style.padding = '0';
+                navLinks.style.border = 'none';
+                navLinks.style.flexDirection = 'row';
+            }
+        });
+
+        // Add hover effect for cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Console welcome message
+        console.log('%c🚀 Welcome to CreatorOS - The Future of Content Creation', 
+                    'font-size: 20px; color: #8B5CF6; font-weight: bold;');
+        console.log('%cJoin the creator revolution at https://creatoros.io', 
+                    'font-size: 14px; color: #EC4899;');
+    </script>
+</body>
+</html>
